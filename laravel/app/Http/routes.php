@@ -18,3 +18,38 @@ Route::get('/', function () {
 Route::get('welcome', function () {
     return 'Hello World';
 });
+
+// Logging in and out
+get('/auth/login', 'Auth\AuthController@getLogin');
+post('/auth/login', 'Auth\AuthController@postLogin');
+get('/auth/logout', 'Auth\AuthController@getLogout');
+
+// Example 1
+// login url http://www.example.com/account/login
+// logout url http://www.example.com/account/logout
+// registration url http://www.example.com/account/register
+Route::controllers([
+    'account' => 'Auth\AuthController',
+    'password' => 'Auth\PasswordController',
+]);
+
+// Example 2
+// login url http://www.example.com/login
+// logout url http://www.example.com/logout
+// registration url http://www.example.com/register
+Route::controllers([
+    '' => 'Auth\AuthController',
+    'password' => 'Auth\PasswordController',
+]);
+
+// Example 3
+// redefine all routes
+Route::get('example/register', 'Auth\AuthController@getRegister');
+Route::post('example/register', 'Auth\AuthController@postRegister');
+Route::get('example/login', 'Auth\AuthController@getLogin');
+Route::post('example/login', 'Auth\AuthController@postLogin');
+Route::get('example/logout', 'Auth\AuthController@getLogout');
+Route::get('example/email', 'Auth\PasswordController@getEmail');
+Route::post('example/email', 'Auth\PasswordController@postEmail');
+Route::get('example/reset/{code}', 'Auth\PasswordController@getReset');
+Route::post('example/reset', 'Auth\PasswordController@postReset');

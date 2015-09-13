@@ -144,6 +144,11 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /*
+         * GP - add missing auth from L5 into L5.1
+         */
+        Bestmomo\Scafold\ScafoldServiceProvider::class,
+
     ],
 
     /*
