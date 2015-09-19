@@ -19,11 +19,37 @@ Route::get('welcome', function () {
     return 'Hello World';
 });
 
+Route::get('user/{user}', [
+    'middleware' => ['auth', 'roles'], // A 'roles' middleware must be specified
+    'uses' => 'UserController@index',
+    'roles' => ['administrator', 'casier'] // Only an administrator, or a manager can access this route
+]);
+
 // Logging in and out
 get('/auth/login', 'Auth\AuthController@getLogin');
 post('/auth/login', 'Auth\AuthController@postLogin');
 get('/auth/logout', 'Auth\AuthController@getLogout');
 
+Route::get('login', 'Auth\AuthController@getLogin');
+
+// redefine all routes
+Route::get('auth/register', 'Auth\AuthController@getRegister');
+Route::post('auth/register', 'Auth\AuthController@postRegister');
+Route::get('auth/login', 'Auth\AuthController@getLogin');
+Route::post('auth/login', 'Auth\AuthController@postLogin');
+Route::get('auth/logout', 'Auth\AuthController@getLogout');
+Route::get('auth/email', 'Auth\PasswordController@getEmail');
+Route::post('auth/email', 'Auth\PasswordController@postEmail');
+Route::get('auth/reset/{code}', 'Auth\PasswordController@getReset');
+Route::post('auth/reset', 'Auth\PasswordController@postReset');
+
+/*de verificat
+Route::controllers([
+    'auth' => 'Auth\AuthController',
+    'password' => 'Auth\PasswordController',
+]);
+
+/*
 // Example 1
 // login url http://www.example.com/account/login
 // logout url http://www.example.com/account/logout
@@ -43,13 +69,5 @@ Route::controllers([
 ]);
 
 // Example 3
-// redefine all routes
-Route::get('example/register', 'Auth\AuthController@getRegister');
-Route::post('example/register', 'Auth\AuthController@postRegister');
-Route::get('example/login', 'Auth\AuthController@getLogin');
-Route::post('example/login', 'Auth\AuthController@postLogin');
-Route::get('example/logout', 'Auth\AuthController@getLogout');
-Route::get('example/email', 'Auth\PasswordController@getEmail');
-Route::post('example/email', 'Auth\PasswordController@postEmail');
-Route::get('example/reset/{code}', 'Auth\PasswordController@getReset');
-Route::post('example/reset', 'Auth\PasswordController@postReset');
+
+*/
