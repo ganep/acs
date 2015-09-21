@@ -42,6 +42,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function hasRole($roles)
     {
         $this->have_role = $this->getUserRole();
+        dd($this->have_role);
 
         // Check if the user is a root account
         if ($this->have_role->name == 'Root') {

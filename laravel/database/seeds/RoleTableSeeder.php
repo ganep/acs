@@ -2,9 +2,15 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
-use App\Role;
 
-class RoleTableSeeder extends Seeder{
+
+class RoleTableSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
 
     public function run()
     {
@@ -51,5 +57,4 @@ class RoleTableSeeder extends Seeder{
             'description'   => 'acces la modulul de casierie al bisericii locale'
         ]);
     }
-
 }
